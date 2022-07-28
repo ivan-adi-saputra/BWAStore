@@ -23,7 +23,7 @@
         <!-- Sidebar -->
         <div class="border-right" id="sidebar-wrapper">
           <div class="sidebar-heading text-center">
-            <img src="/images/admin.webp" alt="" class="my-4" style="max-width: 200px" />
+            <img src="/images/admin-icon.png" alt="" class="my-4" style="max-width: 150px" />
           </div>
           <div class="list-group list-group-flush">
             <a
