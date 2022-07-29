@@ -48,8 +48,8 @@
               >Transactions</a
             >
             <a
-              href=""
-              class="list-group-item list-group-item-action {{ Request::is('dashboard/setting') ? 'active' : '' }}"
+              href="{{ route('user.index') }}"
+              class="list-group-item list-group-item-action {{ Request::is('admin/user*') ? 'active' : '' }}"
               >Users</a
             >
             <a

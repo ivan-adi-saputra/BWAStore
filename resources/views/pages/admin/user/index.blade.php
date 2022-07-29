@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Store Category
+    User
 @endsection
 
 @section('content')
@@ -12,9 +12,9 @@
     >
     <div class="container-fluid">
         <div class="dashboard-heading">
-            <h2 class="dashboard-title">Category</h2>
+            <h2 class="dashboard-title">User</h2>
             <p class="dashboard-subtitle">
-                List of Categories
+                List of Users
             </p>
         </div>
         <div class="dashboard-content">
@@ -22,17 +22,22 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
-                            <a href="{{  route('category.create') }}" class="btn btn-primary mb-3">
-                                + Tambah Kategori Baru
+                            <a href="{{  route('user.create') }}" class="btn btn-primary mb-3">
+                                + Tambah User Baru
                             </a>
                             <div class="table-responsive">
+                            @if( session()->has('success') )
+                                <div class="alert alert-success" role="alert">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
                                 <table class="table table-hover scroll-horizontal-vertical w-100" id="crudTable">
                                     <thead>
                                     <tr>
                                         <th>ID</th>
                                         <th>Nama</th>
-                                        <th>Foto</th>
-                                        <th>Slug</th>
+                                        <th>Email</th>
+                                        <th>Roles</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </thead>
@@ -62,8 +67,8 @@
             columns: [
                 { data: 'id', name: 'id' },
                 { data: 'name', name: 'name' },
-                { data: 'photos', name: 'photos' },
-                { data: 'slug', name: 'slug' },
+                { data: 'email', name: 'email' },
+                { data: 'roles', name: 'roles' },
                 {
                     data: 'action',
                     name: 'action',
