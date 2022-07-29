@@ -12,6 +12,7 @@ use App\Http\Controllers\DashboardSettingController;
 use App\Http\Controllers\DashboardTransactionController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Admin\DashboardAdminController;
+use App\Http\Controllers\Admin\CategoryAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,7 +58,8 @@ Route::post('login', [LoginController::class, 'authenticate'])->name('authentica
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::prefix('admin')
-      ->namespace('Admin')
+      // ->namespace('Admin')
       ->group(function() {
         Route::get('/', [DashboardAdminController::class, 'index'])->name('admin-dashboard');
+        Route::resource('category', CategoryAdminController::class);
       });
