@@ -13,4 +13,18 @@ class Product extends Model
 
     protected $guarded = ['id']; 
     
+    public function galleries()
+    {
+        return $this->hasMany(ProductGallery::class, 'products_id', 'id');
+    }
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'users_id');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'categories_id', 'id');
+    }
 }
