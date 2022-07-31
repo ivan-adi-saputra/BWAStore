@@ -12,4 +12,10 @@ class ProductGallery extends Model
     use SoftDeletes; 
 
     protected $guarded = ['id'];
+    // protected $fillable = ['products_id', 'photos'];
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'products_id', 'id');
+    }
 }
