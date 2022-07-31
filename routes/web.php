@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\DashboardAdminController;
 use App\Http\Controllers\Admin\CategoryAdminController;
 use App\Http\Controllers\Admin\ProductAdminController;
 use App\Http\Controllers\Admin\ProductGalleryAdminController;
+use App\Http\Controllers\Admin\TransactionAdminController;
 use App\Http\Controllers\Admin\UserAdminController;
 
 /*
@@ -68,4 +69,5 @@ Route::prefix('admin')
         Route::resource('user', UserAdminController::class);
         Route::resource('product', ProductAdminController::class);
         Route::resource('product-gallery', ProductGalleryAdminController::class);
+        Route::resource('transaction', TransactionAdminController::class);
       });

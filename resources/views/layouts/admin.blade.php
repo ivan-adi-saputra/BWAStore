@@ -48,8 +48,8 @@
               >Categories</a
             >
             <a
-              href=""
-              class="list-group-item list-group-item-action {{ Request::is('dashboard/transaction*') ? 'active' : '' }}"
+              href="{{ route('transaction.index') }}"
+              class="list-group-item list-group-item-action {{ Request::is('admin/transaction*') ? 'active' : '' }}"
               >Transactions</a
             >
             <a
@@ -59,7 +59,7 @@
             >
             <a
               href=""
-              class="list-group-item list-group-item-action {{ Request::is('dashboard/setting') ? 'active' : '' }}"
+              class="list-group-item list-group-item-action {{ Request::is('admin/logout') ? 'active' : '' }}"
               >Sign Out</a
             >
           </div>
