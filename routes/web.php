@@ -35,6 +35,7 @@ use App\Http\Controllers\Admin\UserAdminController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('categories', [CategoryController::class, 'index'])->name('categories');
+Route::get('categories-details/{id}', [CategoryController::class, 'details'])->name('categories-details');
 
 Route::get('details/{id}', [DetailController::class, 'index'])->name('details');
 

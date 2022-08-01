@@ -17,7 +17,7 @@
             <div class="col-12">
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="/">Home</a></li>
+                  <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
                   <li class="breadcrumb-item active" aria-current="page">
                     Product Details
                   </li>
@@ -68,9 +68,9 @@
           <div class="container">
             <div class="row">
               <div class="col-lg-8">
-                <h1>Sofa Ternyaman</h1>
-                <div class="owner">By Galih Pratama</div>
-                <div class="price">$1,409</div>
+                <h1>{{ $product->name }}</h1>
+                <div class="owner">By {{ $product->user->name }}</div>
+                <div class="price">${{ $product->price }}</div>
               </div>
               <div class="col-lg-2" data-aos="zoom-in">
                 <a
@@ -86,20 +86,7 @@
           <div class="container">
             <div class="row">
               <div class="col-12 col-lg-8">
-                <p>
-                  The Nike Air Max 720 SE goes bigger than ever before with
-                  Nike's tallest Air unit yet for unimaginable, all-day comfort.
-                  There's super breathable fabrics on the upper, while colours
-                  add a modern edge.
-                </p>
-                <p>
-                  Bring the past into the future with the Nike Air Max 2090, a
-                  bold look inspired by the DNA of the iconic Air Max 90.
-                  Brand-new Nike Air cushioning underfoot adds unparalleled
-                  comfort while transparent mesh and vibrantly coloured details
-                  on the upper are blended with timeless OG features for an
-                  edgy, modernised look.
-                </p>
+                {!! $product->description !!}
               </div>
             </div>
           </div>
@@ -163,7 +150,7 @@
 @endsection
 
 @push('addon-script')
-        <script src="/vendor/vue/vue.js"></script>
+    <script src="/vendor/vue/vue.js"></script>
     <script>
       var gallery = new Vue({
         el: "#gallery",
@@ -171,24 +158,14 @@
           AOS.init();
         },
         data: {
-          activePhoto: 3,
+          activePhoto: 0,
           photos: [
+            @foreach ($product->galleries as $gallery)
             {
-              id: 1,
-              url: "/images/product-details-1.jpg",
+              id: {{ $gallery->id }},
+              url: "{{ asset('storage/' . $gallery->photos) }}",
             },
-            {
-              id: 2,
-              url: "/images/product-details-2.jpg",
-            },
-            {
-              id: 3,
-              url: "/images/product-details-3.jpg",
-            },
-            {
-              id: 4,
-              url: "/images/product-details-4.jpg",
-            },
+            @endforeach
           ],
         },
         methods: {
