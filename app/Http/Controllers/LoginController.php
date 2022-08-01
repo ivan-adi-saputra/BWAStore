@@ -15,17 +15,17 @@ class LoginController extends Controller
     public function authenticate(Request $request)
     {
         $credentials = $request->validate([
-            'email' => 'required', 
+            'email' => 'required|email:dns', 
             'password' => 'required'
         ]);
 
         if(Auth::attempt($credentials)){
             $request->session()->regenerate();
 
-            return redirect()->intended('dashboard');
+            return redirect()->intended('/');
         }
 
-        return redirect()->back()->withErrors('email / password yang anda masukkan salah');
+        return redirect()->back()->with( 'error','email / password yang anda masukkan salah');
     }
 
     public function logout(Request $request)

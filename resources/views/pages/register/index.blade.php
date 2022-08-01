@@ -31,6 +31,18 @@
                   />
                 </div>
                 <div class="form-group">
+                  <label>Username</label>
+                  <input
+                    type="text"
+                    class="form-control is-valid"
+                    aria-describedby="usernameHelp"
+                    v-model="username"
+                    name="username"
+                    placeholder="Username"
+                    value="{{ old('username') }}"
+                  />
+                </div>
+                <div class="form-group">
                   <label>Email</label>
                   <input
                     type="email"
@@ -46,7 +58,7 @@
                   <label>Password</label>
                   <input type="password" class="form-control" name="password" placeholder="password"/>
                 </div>
-                {{-- <div class="form-group">
+               <div class="form-group">
                   <label>Store</label>
                   <p class="text-muted">
                     Apakah anda juga ingin membuka toko?
@@ -58,8 +70,8 @@
                       class="custom-control-input"
                       type="radio"
                       name="is_store_open"
-                      id="openStoreTrue"
                       value="1"
+                      id="openStoreTrue"
                       v-model="is_store_open"
                       :value="true"
                     />
@@ -74,8 +86,8 @@
                       class="custom-control-input"
                       type="radio"
                       name="is_store_open"
-                      id="openStoreFalse"
                       value="0"
+                      id="openStoreFalse"
                       v-model="is_store_open"
                       :value="false"
                     />
@@ -94,14 +106,17 @@
                     class="form-control"
                     aria-describedby="storeHelp"
                     name="store_name"
+                    required
                   />
                 </div>
                 <div class="form-group" v-if="is_store_open">
                   <label>Kategori</label>
-                  <select name="category" class="form-control">
-                    <option value="" disabled>Select Category</option>
+                  <select name="categories_id" class="form-control">
+                    @foreach ($categories as $category)
+                      <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
                   </select>
-                </div> --}}
+                </div>
                 <button type="submit" class="btn btn-success btn-block mt-4">
                   Sign Up Now
                 </button>

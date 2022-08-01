@@ -4,6 +4,10 @@
     Store Login Page
 @endsection
 
+@push('addon-style')
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />  
+@endpush
+
 @section('content')
      <!-- Page Content -->
     <div class="page-content page-auth">
@@ -22,6 +26,12 @@
                 Belanja kebutuhan utama, <br />
                 menjadi lebih mudah
               </h2>
+              @if(session()->has('error'))
+                    <div class="alert alert-danger alert-dismissable">
+                      <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                      {{ session('error') }}
+                    </div>
+              @endif
               <form class="mt-3" method="POST" action="{{ route('authenticate') }}">
               @csrf
                 <div class="form-group">
@@ -52,4 +62,9 @@
         </div>
       </div>
     </div>
+@endsection
+
+@section('addon-script')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 @endsection
