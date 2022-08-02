@@ -75,12 +75,22 @@
                     </form>
                   </div>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link d-inline-block mt-2" href="{{ route('cart') }}">
+                    <img src="/images/icon-cart-empty.svg" alt="" />
+                  </a>
+                </li>
               </ul>
               <!-- Mobile Menu -->
               <ul class="navbar-nav d-block d-lg-none mt-3">
                 <li class="nav-item">
                   <a class="nav-link" href="#">
                     Hi, Angga
+                  </a>
+                </li>
+                 <li class="nav-item">
+                  <a class="nav-link d-inline-block" href="#">
+                    Cart
                   </a>
                 </li>
               </ul>
