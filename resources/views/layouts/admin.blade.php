@@ -57,11 +57,10 @@
               class="list-group-item list-group-item-action {{ Request::is('admin/user*') ? 'active' : '' }}"
               >Users</a
             >
-            <a
-              href=""
-              class="list-group-item list-group-item-action {{ Request::is('admin/logout') ? 'active' : '' }}"
-              >Sign Out</a
-            >
+            <form action="{{ route('logout') }}" method="post">
+            @csrf
+              <button class="list-group-item list-group-item-action">Sign Out</button>
+            </form>
           </div>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -108,7 +107,7 @@
                       alt=""
                       class="rounded-circle mr-2 profile-picture"
                     />
-                    Hi, Angga
+                    Hi, {{ auth()->user()->name }}
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{ route('home') }}"
@@ -127,7 +126,7 @@
               <ul class="navbar-nav d-block d-lg-none mt-3">
                 <li class="nav-item">
                   <a class="nav-link" href="#">
-                    Hi, Angga
+                    Hi, {{ auth()->user()->name }}
                   </a>
                 </li>
                 <li class="nav-item">

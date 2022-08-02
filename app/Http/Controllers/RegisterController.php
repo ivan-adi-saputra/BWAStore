@@ -11,7 +11,8 @@ class RegisterController extends Controller
     public function index()
     {
         return view('pages.register.index', [
-            'categories' => Category::all()
+            'categories' => Category::all(), 
+            'user' => User::all()
         ]);
     }
 
@@ -20,13 +21,15 @@ class RegisterController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:255', 
             'username'=> 'required|unique:users',
-            'email' => 'required|email:dns|unique:users', 
+            'email' => 'required|email:dns|unique:users',
             'store_name' => 'nullable|max:255', 
-            'categories_id' => 'nullable|integer'
+            'categories_id' => 'nullable|integer',
         ]);
+        $validatedData['store_status'] = $request->store_status;
         $validatedData['password'] = bcrypt($request->password);
 
         User::create($validatedData);
+
         return redirect()->route('register-success');
     }
      

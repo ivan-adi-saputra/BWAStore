@@ -97,13 +97,13 @@
                       alt=""
                       class="rounded-circle mr-2 profile-picture"
                     />
-                    Hi, Angga
+                    Hi, {{ auth()->user()->name }}
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/index.html"
+                    <a class="dropdown-item" href="{{ route('home') }}"
                       >Back to Store</a
                     >
-                    <a class="dropdown-item" href="/dashboard-account.html"
+                    <a class="dropdown-item" href="{{ route('dashboard-account') }}"
                       >Settings</a
                     >
                     <div class="dropdown-divider"></div>
@@ -124,7 +124,7 @@
               <ul class="navbar-nav d-block d-lg-none mt-3">
                 <li class="nav-item">
                   <a class="nav-link" href="#">
-                    Hi, Angga
+                    Hi, {{ auth()->user()->name }}
                   </a>
                 </li>
                 <li class="nav-item">

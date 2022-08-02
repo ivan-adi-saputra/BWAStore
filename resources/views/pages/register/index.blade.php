@@ -55,11 +55,17 @@
                   />
                 </div>
                 <div class="form-group">
-                  <label>Password</label>
-                  <input type="password" class="form-control" name="password" placeholder="password"/>
+                  <label for="password">Password</label>
+                  <input type="password" id="password" class="form-control" name="password" placeholder="password"/>
+                   @error('password')
+                   <div class="invalid-feedback">
+                    {{ $message }}
+                   </div>
+                  @enderror
                 </div>
+
                <div class="form-group">
-                  <label>Store</label>
+                  <label for="store_status">Store</label>
                   <p class="text-muted">
                     Apakah anda juga ingin membuka toko?
                   </p>
@@ -69,11 +75,11 @@
                     <input
                       class="custom-control-input"
                       type="radio"
-                      name="is_store_open"
+                      name="store_status"
                       value="1"
                       id="openStoreTrue"
-                      v-model="is_store_open"
-                      :value="true"
+                      v-model="store_status_true"
+                      {{-- :value="true" --}}
                     />
                     <label class="custom-control-label" for="openStoreTrue"
                       >Iya, boleh</label
@@ -85,33 +91,35 @@
                     <input
                       class="custom-control-input"
                       type="radio"
-                      name="is_store_open"
+                      name="store_status"
                       value="0"
                       id="openStoreFalse"
-                      v-model="is_store_open"
-                      :value="false"
+                      v-model="store_status_false"
+                      {{-- :value="false" --}}
                     />
                     <label
                       makasih
                       class="custom-control-label"
-                      for="openStoreFalse"
+                      for="openStoreFalse" 
                       >Enggak, makasih</label
                     >
                   </div>
                 </div>
-                <div class="form-group" v-if="is_store_open">
+                <div class="form-group" v-if="store_status_true">
                   <label>Nama Toko</label>
+                  <small class="text-danger">*kosongkan jika tidak ingin dipilih</small>
                   <input
                     type="text"
                     class="form-control"
                     aria-describedby="storeHelp"
                     name="store_name"
-                    required
                   />
                 </div>
-                <div class="form-group" v-if="is_store_open">
+                <div class="form-group" v-if="store_status_true">
                   <label>Kategori</label>
+                  <small class="text-danger">*kosongkan jika tidak ingin dipilih</small>
                   <select name="categories_id" class="form-control">
+                    <option value=""></option>
                     @foreach ($categories as $category)
                       <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
@@ -154,7 +162,9 @@
           // name: "Angga Hazza Sett",
           // email: "kamujagoan@bwa.id",
           // password: "",
-          is_store_open: true,
+          // store_status: true,
+          // store_status_true: true,
+          // store_status_false: false,
           store_name: "",
         },
       });
