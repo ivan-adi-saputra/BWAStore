@@ -54,4 +54,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Product::class);
     }
+
+    public function cart()
+    {
+        return $this->hasOne(Cart::class, 'id', 'users_id');
+    }
 }

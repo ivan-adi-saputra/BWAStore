@@ -40,6 +40,8 @@ Route::get('categories-details/{id}', [CategoryController::class, 'details'])->n
 Route::get('details/{id}', [DetailController::class, 'index'])->name('details');
 
 Route::get('cart', [CartController::class, 'index'])->name('cart');
+Route::post('cart/{id}', [CartController::class, 'Add'])->name('cart-add');
+Route::post('cart/{id}', [CartController::class, 'Delete'])->name('cart-delete');
 Route::get('success', [CartController::class, 'success'])->name('success');
 
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');

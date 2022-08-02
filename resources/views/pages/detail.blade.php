@@ -69,15 +69,16 @@
             <div class="row">
               <div class="col-lg-8">
                 <h1>{{ $product->name }}</h1>
-                <div class="owner">By {{ $product->user->name }}</div>
-                <div class="price">${{ $product->price }}</div>
+                <div class="owner">By {{ $product->user->store_name }}</div>
+                <div class="price">${{ number_format($product->price) }}</div>
               </div>
               <div class="col-lg-2" data-aos="zoom-in">
-                <a
-                  class="btn btn-success nav-link px-4 text-white btn-block mb-3"
-                  href="/cart.html"
-                  >Add to Cart</a
-                >
+                @auth
+                    <form action="{{ route('cart-add', $product->id) }}" method="post">
+                    @csrf
+                      <button class="btn btn-success nav-link px-4 text-white btn-block mb-3">Add to Cart</button>
+                    </form>
+                @endauth
               </div>
             </div>
           </div>

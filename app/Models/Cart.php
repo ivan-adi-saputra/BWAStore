@@ -12,4 +12,14 @@ class Cart extends Model
     use SoftDeletes;
 
     protected $guarded = ['id'];
+
+    public function product()
+    {
+        return $this->hasOne(Product::class, 'id', 'products_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'users_id', 'id');
+    }
 }
