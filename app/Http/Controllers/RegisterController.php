@@ -10,7 +10,7 @@ class RegisterController extends Controller
 {
     public function index()
     {
-        return view('pages.register.index', [
+        return view('pages.register.register', [
             'categories' => Category::all(), 
             'user' => User::all()
         ]);
@@ -36,5 +36,10 @@ class RegisterController extends Controller
     public function success()
     {
         return view('pages.register.success');
+    }
+
+    public function check(Request $request) 
+    {
+        return User::where('email', $request->email)->count() > 0 ? 'unavailable' : 'Available';
     }
 }
