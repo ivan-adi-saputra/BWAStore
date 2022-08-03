@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\ProductAdminController;
 use App\Http\Controllers\Admin\ProductGalleryAdminController;
 use App\Http\Controllers\Admin\TransactionAdminController;
 use App\Http\Controllers\Admin\UserAdminController;
+use App\Http\Controllers\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,9 +41,12 @@ Route::get('categories-details/{id}', [CategoryController::class, 'details'])->n
 Route::get('details/{id}', [DetailController::class, 'index'])->name('details');
 
 Route::get('cart', [CartController::class, 'index'])->name('cart');
-Route::post('cart/{id}', [CartController::class, 'Add'])->name('cart-add');
+Route::post('cart/add/{id}', [CartController::class, 'Add'])->name('cart-add');
 Route::post('cart/{id}', [CartController::class, 'Delete'])->name('cart-delete');
 Route::get('success', [CartController::class, 'success'])->name('success');
+
+Route::post('checkout', [CheckoutController::class, 'proccess'])->name('checkout');
+Route::post('checkout/callback', [CheckoutController::class, 'callback'])->name('checkout-callback');
 
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
