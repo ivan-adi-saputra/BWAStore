@@ -11,7 +11,7 @@
           >
             <div class="container-fluid">
               <div class="dashboard-heading">
-                <h2 class="dashboard-title">#STORE0839</h2>
+                <h2 class="dashboard-title">#{{ $transaction->transaction->code }}</h2>
                 <p class="dashboard-subtitle">
                   Transaction Details
                 </p>
@@ -24,7 +24,7 @@
                         <div class="row">
                           <div class="col-12 col-md-4">
                             <img
-                              src="/images/product-details-dashboard.png"
+                              src="{{ asset('storage/' . $transaction->product->galleries->first()->photos ?? '/images/product-details-dashboard.png') }}"
                               alt=""
                               class="w-100 mb-3"
                             />
@@ -33,12 +33,12 @@
                             <div class="row">
                               <div class="col-12 col-md-6">
                                 <div class="product-title">Customer Name</div>
-                                <div class="product-subtitle">Angga Risky</div>
+                                <div class="product-subtitle">{{ $transaction->transaction->user->name }}</div>
                               </div>
                               <div class="col-12 col-md-6">
                                 <div class="product-title">Product Name</div>
                                 <div class="product-subtitle">
-                                  Shirup Marzzan
+                                  {{ $transaction->product->name }}
                                 </div>
                               </div>
                               <div class="col-12 col-md-6">
@@ -46,24 +46,24 @@
                                   Date of Transaction
                                 </div>
                                 <div class="product-subtitle">
-                                  12 Januari, 2020
+                                  {{ $transaction->created_at->format('j F Y') }}
                                 </div>
                               </div>
                               <div class="col-12 col-md-6">
                                 <div class="product-title">Payment Status</div>
                                 <div class="product-subtitle text-danger">
                                   {{-- {{ status }} --}}
-                                  Pending
+                                  {{ $transaction->transaction->transaction_status }}
                                 </div>
                               </div>
                               <div class="col-12 col-md-6">
                                 <div class="product-title">Total Amount</div>
-                                <div class="product-subtitle">$280,409</div>
+                                <div class="product-subtitle">$ {{ $transaction->transaction->total_price }}</div>
                               </div>
                               <div class="col-12 col-md-6">
                                 <div class="product-title">Mobile</div>
                                 <div class="product-subtitle">
-                                  +628 2020 11111
+                                  {{ $transaction->transaction->user->phone_number }}
                                 </div>
                               </div>
                             </div>
@@ -74,17 +74,19 @@
                             <h5>
                               Shipping Informations
                             </h5>
-                            <div class="row">
+                           <form action="{{ route('dashboard-transaction-update', $transaction->id) }}" method="post">
+                            @csrf 
+                             <div class="row">
                               <div class="col-12 col-md-6">
                                 <div class="product-title">Address 1</div>
                                 <div class="product-subtitle">
-                                  Setra Duta Cemara
+                                  {{ $transaction->transaction->user->address_one }}
                                 </div>
                               </div>
                               <div class="col-12 col-md-6">
                                 <div class="product-title">Address 2</div>
                                 <div class="product-subtitle">
-                                  Blok B2 No. 34
+                                  {{ $transaction->transaction->user->address_two }}
                                 </div>
                               </div>
                               <div class="col-12 col-md-6">
@@ -92,23 +94,23 @@
                                   Province
                                 </div>
                                 <div class="product-subtitle">
-                                  West Java
+                                  {{ App\Models\Province::find($transaction->transaction->user->provinces_id)->name }}
                                 </div>
                               </div>
                               <div class="col-12 col-md-6">
                                 <div class="product-title">City</div>
                                 <div class="product-subtitle">
-                                  Bandung
+                                  {{ App\Models\Regency::find($transaction->transaction->user->regencies_id)->name }}
                                 </div>
                               </div>
                               <div class="col-12 col-md-6">
                                 <div class="product-title">Postal Code</div>
-                                <div class="product-subtitle">123999</div>
+                                <div class="product-subtitle">{{ $transaction->transaction->user->zip_code }}</div>
                               </div>
                               <div class="col-12 col-md-6">
                                 <div class="product-title">Country</div>
                                 <div class="product-subtitle">
-                                  Indonesia
+                                  {{ $transaction->transaction->user->country }}
                                 </div>
                               </div>
                               <div class="col-12">
@@ -116,7 +118,7 @@
                                   <div class="col-md-3">
                                     <div class="product-title">Shipping Status</div>
                                     <select
-                                      name="status"
+                                      name="shipping_status"
                                       id="status"
                                       class="form-control"
                                       v-model="status"
@@ -151,6 +153,7 @@
                                 </div>
                               </div>
                             </div>
+                           </form>
                           </div>
                         </div>
                       </div>
@@ -168,8 +171,8 @@
       var transactionDetails = new Vue({
         el: "#transactionDetails",
         data: {
-          status: "SHIPPING",
-          resi: "BDO12308012132",
+          status: "{{ $transaction->shipping_status }}",
+          resi: "{{ $transaction->resi }}",
         },
       });
     </script>
