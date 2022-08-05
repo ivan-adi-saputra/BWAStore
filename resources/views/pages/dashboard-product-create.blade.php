@@ -19,7 +19,10 @@
               <div class="dashboard-content">
                 <div class="row">
                   <div class="col-12">
-                    <form action="">
+
+                    <form action="{{ route('dashboard-product-store') }}" method="POST" enctype="multipart/form-data">
+                      @csrf
+                      <input type="hidden" name="users_id" value="{{ auth()->user()->id }}">
                       <div class="card">
                         <div class="card-body">
                           <div class="row">
@@ -31,8 +34,8 @@
                                   class="form-control"
                                   id="name"
                                   aria-describedby="name"
-                                  name="storeName"
-                                  value="Papel La Casa"
+                                  name="name"
+                                  value="{{ old('name') }}"
                                 />
                               </div>
                             </div>
@@ -45,8 +48,18 @@
                                   id="price"
                                   aria-describedby="price"
                                   name="price"
-                                  value="200"
+                                  value="{{ old('price') }}"
                                 />
+                              </div>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <label for="category">Category</label>
+                                <select class="form-control" name="categories_id">
+                                  @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                  @endforeach
+                                </select>
                               </div>
                             </div>
                             <div class="col-md-12">
@@ -59,21 +72,23 @@
                                   rows="4"
                                   class="form-control"
                                 >
-The Nike Air Max 720 SE goes bigger than ever before with Nike's tallest Air unit yet for unimaginable, all-day comfort. There's super breathable fabrics on the upper, while colours add a modern edge. Bring the past into the future with the Nike Air Max 2090, a bold look inspired by the DNA of the iconic Air Max 90. Brand-new Nike Air cushioning
+                                {{ old('descrption') }}
                                 </textarea>
                               </div>
                             </div>
                             <div class="col-md-12">
                               <div class="form-group">
-                                <label for="thumbnails">Thumbnails</label>
+                                <label for="imgInp">Thumbnails</label>
                                 <input
                                   type="file"
                                   multiple
                                   class="form-control pt-1"
-                                  id="thumbnails"
-                                  aria-describedby="thumbnails"
-                                  name="thumbnails"
+                                  aria-describedby="photos"
+                                  name="photos"
+                                  id="imgInp"
+                                  accept="image/*"
                                 />
+                                <img id="blah" class=""/>
                                 <small class="text-muted">
                                   Kamu dapat memilih lebih dari satu file
                                 </small>
@@ -99,3 +114,14 @@ The Nike Air Max 720 SE goes bigger than ever before with Nike's tallest Air uni
             </div>
           </div>
 @endsection
+
+@push('addon-script')
+          <script>
+            imgInp.onchange = evt => {
+              const [file] = imgInp.files
+              if (file) {
+                blah.src = URL.createObjectURL(file)
+              }
+            }
+          </script>
+@endpush

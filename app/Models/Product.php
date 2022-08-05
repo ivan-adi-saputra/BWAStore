@@ -11,7 +11,7 @@ class Product extends Model
     use HasFactory;
     use SoftDeletes; 
 
-    protected $guarded = ['id']; 
+    protected $guarded = ['id'];
 
     public function scopeFilter($query, array $filters)
     {

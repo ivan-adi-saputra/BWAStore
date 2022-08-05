@@ -128,7 +128,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link d-inline-block" href="#">
+                  <a class="nav-link d-inline-block" href="{{ route('cart') }}">
                     Cart
                   </a>
                 </li>
