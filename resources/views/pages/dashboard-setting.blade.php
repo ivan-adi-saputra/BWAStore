@@ -19,20 +19,21 @@
               <div class="dashboard-content">
                 <div class="row">
                   <div class="col-12">
-                    <form action="">
+                    <form action="{{ route('dashboard-settings-store', 'dashboard-settings') }}" method="POST">
+                      @csrf
                       <div class="card">
                         <div class="card-body">
                           <div class="row">
                             <div class="col-md-6">
                               <div class="form-group">
-                                <label for="storeName">Store Name</label>
+                                <label for="store_name">Store Name</label>
                                 <input
                                   type="text"
                                   class="form-control"
-                                  id="storeName"
+                                  id="store_name"
                                   aria-describedby="emailHelp"
-                                  name="storeName"
-                                  value="Papel La Casa"
+                                  name="store_name"
+                                  value="{{ $user->store_name }}"
                                 />
                               </div>
                             </div>
@@ -40,13 +41,19 @@
                           <div class="row">
                             <div class="col-md-6">
                               <div class="form-group">
-                                <label for="category">Category</label>
+                                <label for="categories_id">Category</label>
                                 <select
-                                  name="category"
-                                  id="category"
+                                  name="categories_id"
+                                  id="categories_id"
                                   class="form-control"
                                 >
-                                  <option value="Furniture">Furniture</option>
+                                @foreach ($categories as $category)
+                                @if ( $category->id == $user->categories_id )
+                                  <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+                                @else 
+                                  <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endif
+                                @endforeach
                                 </select>
                               </div>
                             </div>
@@ -64,10 +71,10 @@
                                   <input
                                     class="custom-control-input"
                                     type="radio"
-                                    name="is_store_open"
+                                    name="store_status"
                                     id="openStoreTrue"
-                                    value="true"
-                                    checked
+                                    value="1"
+                                    {{ $user->store_status == 1 ? 'checked' : '' }}
                                   />
                                   <label
                                     class="custom-control-label"
@@ -81,9 +88,10 @@
                                   <input
                                     class="custom-control-input"
                                     type="radio"
-                                    name="is_store_open"
+                                    name="store_status"
                                     id="openStoreFalse"
-                                    value="false"
+                                    value="0"
+                                    {{ $user->store_status == 0  || NULL ? 'checked' : '' }}
                                   />
                                   <label
                                     makasih
