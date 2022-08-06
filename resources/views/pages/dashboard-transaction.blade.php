@@ -53,7 +53,7 @@
                     <div class="row mt-3">
                       <div class="col-12 mt-2">
                         
-                        @foreach ($buytransactions as $transaction)
+                        @foreach ($selltransactions as $transaction)
                             <a
                               class="card card-list d-block"
                               href="{{ route('dashboard-transaction-details', $transaction->id) }}"
@@ -100,7 +100,7 @@
                     <div class="row mt-3">
                       <div class="col-12 mt-2">
                         
-                        @foreach ($selltransactions as $transaction)
+                        @foreach ($buytransactions as $transaction)
                             <a
                               class="card card-list d-block"
                               href=""
